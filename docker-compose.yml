@@ -1,0 +1,21 @@
+version: '3'
+services:
+  test_db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./Datafiniti_Fast_Food_Restaurants_May19.csv:/Datafiniti_Fast_Food_Restaurants_May19.csv
+  test_web:
+    build: .
+    command: sh start.sh
+    #command: python manage.py runserver 0.0.0.0:8004
+    volumes:
+      - .:/code
+      - ./Datafiniti_Fast_Food_Restaurants_May19.csv:/Datafiniti_Fast_Food_Restaurants_May19.csv
+    ports:
+      - "8004:8004"
+    depends_on:
+      - test_db

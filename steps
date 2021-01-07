@@ -1,0 +1,9 @@
+pip install -r requirments.txt
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py createsuperuser --username=nishi --email=nishi@example.com
+
+python load_bhaktmber_categories.py

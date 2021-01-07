@@ -1,0 +1,48 @@
+{% extends "resturent/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+<div class="container">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <form method="GET" action="">
+        <div class="col-3">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <!-- {{ form|crispy }} -->
+        </div>
+        <button class="btn btn-success col-3" type="submit">Search</button>
+    </form>
+
+    <h2>Resturant list</h2>
+    
+    <table class="table table-bordered table-condensed">
+        <tr>
+            <th>Resturant Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Distance</th>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>{{object.name}}</td>
+                <td>{{object.address}}</td>
+                <td>{{object.city}}</td>
+                <td>{{object.country}}</td>
+                <td>{{object.distance.km}} KM</td>
+                
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="basic col-3">
+        {% include "resturent/pagination.html" %}    
+    </div>
+
+</div>
+
+{% endblock %}
